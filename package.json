@@ -1,0 +1,37 @@
+{
+  "name": "photoman",
+  "description": "tools for managing photos",
+  "homepage": "https://github.com/krisb/photoman",
+  "version": "0.1.0",
+  "main": "index",
+  "engines": {
+    "node": ">=0.10.x"
+  },
+  "dependencies": {
+    "async": "^0.9.0",
+    "chalk": "^0.4.0",
+    "continuation-local-storage": "^3.0.0",
+    "joi": "^4.5.0",
+    "liftoff": "^0.11.0",
+    "minimist": "^0.1.0"
+  },
+  "devDependencies": {},
+  "bin": {
+    "photoman": "./bin/photoman"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/krisb/photoman"
+  },
+  "keywords": [
+    "git"
+  ],
+  "author": "Kris Brown <kris@kris.me.uk>",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/krisb/photoman/raw/master/LICENSE"
+    }
+  ]
+}

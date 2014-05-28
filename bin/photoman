@@ -1,0 +1,65 @@
+#!/usr/bin/env node
+
+var Liftoff = require('liftoff');
+var Chalk = require('chalk');
+var Minimist = require('minimist');
+var Photoman = require('../lib');
+var Tasks = require('../lib/tasks');
+
+var cli = new Liftoff({
+  name: 'photoman',
+  configName: '.photoman',
+  addExtensions: ['rc']
+});
+
+var options = Minimist(process.argv.slice(2));
+
+var invoke = function (env) {
+  var usage = function() {
+    console.log('  tools for managing photos');
+    console.log();
+    console.log(Chalk.bold('  Usage: photoman <options> <commands>'));
+    console.log();
+    console.log(Chalk.bold.blue('  Options:'));
+    console.log('    -h, --help                  output usage information');
+    console.log('    -v, --verbose               verbose output');
+    console.log('    -x, --trace                 trace output');
+    console.log();
+    console.log(Chalk.bold.blue('  Commands:'));
+    console.log('    init [dir]                  creates .photomanrc in supplied directory or user.home if not supplied');
+    console.log('    list                        lists photos');
+    console.log();
+  };
+
+  var alias = function(orig, alias, defaultValue) {
+    options[orig] = options[orig] || options[alias] || defaultValue;
+    delete options[alias];
+  };
+
+  alias('trace', 'x', false);
+  alias('verbose', 'v', false);
+  alias('help', 'h', false);
+
+  var args = options._; // left over arguments
+
+  if (options.trace) {
+    console.log(Chalk.bold('environment:'), '\n', env, '\n');
+    console.log(Chalk.bold('cli options:'), '\n', options, '\n');
+    console.log(Chalk.bold('liftoff config:'), '\n', this, '\n');
+  }
+
+  if (options.help || args.length === 0) {
+    usage();
+    process.exit(0);
+  }
+
+  if (!Tasks[args[0]]) {
+    console.log(Chalk.bold.red('Unknown task: ' + args[0]));
+    usage();
+    process.exit(1);
+  }
+
+  Photoman.execute(args, options, env);
+};
+
+cli.launch({}, invoke);
