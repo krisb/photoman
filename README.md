@@ -7,5 +7,5 @@ Tools for managing photos
 photoman depends on a number of libraries than can be installed using homebrew:
 
 ```
-brew install exiftool
+brew install exiftool libexif
 ```
