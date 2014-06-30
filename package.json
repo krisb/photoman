@@ -17,10 +17,9 @@
     "jscs": "*",
     "jshint": "*",
     "jshint-stylish": "*",
-    "liftoff": "^0.11.0",
     "lodash": "^2.4.1",
-    "minimist": "^0.1.0",
-    "moment": "^2.7.0"
+    "moment": "^2.7.0",
+    "rc": "^0.4.0"
   },
   "devDependencies": {},
   "bin": {

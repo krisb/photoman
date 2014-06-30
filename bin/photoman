@@ -1,20 +1,20 @@
 #!/usr/bin/env node
 
-var Liftoff = require('liftoff');
 var Chalk = require('chalk');
-var Minimist = require('minimist');
+var Rc = require('rc');
+
 var Photoman = require('../lib');
 var Tasks = require('../lib/tasks');
 
-var cli = new Liftoff({
-  name: 'photoman',
-  configName: '.photoman',
-  addExtensions: ['rc']
-});
+var options = {};
+Rc('photoman', options);
 
-var options = Minimist(process.argv.slice(2));
+var alias = function(orig, alias, defaultValue) {
+  options[orig] = options[orig] || options[alias] || defaultValue;
+  delete options[alias];
+};
 
-var invoke = function (env) {
+var invoke = function () {
   var usage = function() {
     console.log('  tools for managing photos');
     console.log();
@@ -31,11 +31,6 @@ var invoke = function (env) {
     console.log();
   };
 
-  var alias = function(orig, alias, defaultValue) {
-    options[orig] = options[orig] || options[alias] || defaultValue;
-    delete options[alias];
-  };
-
   alias('trace', 'x', false);
   alias('verbose', 'v', false);
   alias('help', 'h', false);
@@ -43,9 +38,7 @@ var invoke = function (env) {
   var args = options._; // left over arguments
 
   if (options.trace) {
-    console.log(Chalk.bold('environment:'), '\n', env, '\n');
-    console.log(Chalk.bold('cli options:'), '\n', options, '\n');
-    console.log(Chalk.bold('liftoff config:'), '\n', this, '\n');
+    console.log(Chalk.bold('options:'), '\n', options, '\n');
   }
 
   if (options.help || args.length === 0) {
@@ -59,7 +52,7 @@ var invoke = function (env) {
     process.exit(1);
   }
 
-  Photoman.execute(args, options, env);
+  Photoman.execute(args, options);
 };
 
-cli.launch({}, invoke);
+invoke();
