@@ -13,6 +13,7 @@
     "continuation-local-storage": "^3.0.0",
     "exif": "^0.4.0",
     "glob": "^4.0.2",
+    "graceful-fs": "^3.0.2",
     "joi": "^4.5.0",
     "jscs": "*",
     "jshint": "*",
