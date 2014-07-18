@@ -33,8 +33,9 @@ var invoke = function () {
     console.log();
     console.log(Chalk.bold.blue('  Commands:'));
     console.log('    init [dir]                  creates .photomanrc in supplied directory or user.home if not supplied');
-    console.log('    list                        lists photos, using the supplied manifest, or scanning');
+    console.log('    list                        lists photo metadata. Uses the supplied manifest or scans.');
     console.log('    write                       scans the filesystem and writes a manifest');
+    console.log('    organise                    origanise photos, moving them if appropriate. Uses the supplied manifest or scans.');
     console.log();
   };
 
