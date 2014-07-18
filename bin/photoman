@@ -43,7 +43,7 @@ var invoke = function () {
   opt('verbose', 'v', false);
   opt('help', 'h', false);
   opt('manifest', 'm', false);
-  opt('renameFileRegexs', undefined, ["^img_[0-9]{4}\\.jpe?g$"]);
+  opt('renameFileRegexs', undefined, ["img_[0-9]{4}\\.jpe?g$", "\\d{8}-\\d{6}(-\\d+)?"]);
 
   conv('renameFileRegexs', function(s) { return new RegExp(s, 'i'); });
 
