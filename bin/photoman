@@ -29,16 +29,19 @@ var invoke = function () {
     console.log('    -h, --help                  output usage information');
     console.log('    -v, --verbose               verbose output');
     console.log('    -x, --trace                 trace output');
+    console.log('    -m, --manifest              manifest file to use');
     console.log();
     console.log(Chalk.bold.blue('  Commands:'));
     console.log('    init [dir]                  creates .photomanrc in supplied directory or user.home if not supplied');
-    console.log('    list                        lists photos');
+    console.log('    list                        lists photos, using the supplied manifest, or scanning');
+    console.log('    write                       scans the filesystem and writes a manifest');
     console.log();
   };
 
   opt('trace', 'x', false);
   opt('verbose', 'v', false);
   opt('help', 'h', false);
+  opt('manifest', 'm', false);
   opt('renameFileRegexs', undefined, ["^img_[0-9]{4}\\.jpe?g$"]);
 
   conv('renameFileRegexs', function(s) { return new RegExp(s, 'i'); });
